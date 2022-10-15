@@ -1,0 +1,123 @@
+<html>
+	<head>
+		<title>WebGL Engine</title>
+		<script>
+			let UI = require('./components/UI');
+			let webglEditorApplication = require('./components/Editor');
+
+			document.onreadystatechange = () => {
+				if ( document.readyState === 'complete' ) {
+					UI.render('body' , webglEditorApplication);
+				}
+			}
+		</script>
+		<style>
+			.topbar-nav{
+				position:absolute;top:0px;left:50px;width:calc(100% - 50px);
+				height:50px;
+				list-style-type: none;
+				padding:0px;
+				margin:0px;
+			}
+			.topbar-nav li{
+				display: inline-block;
+				height:50px;
+				line-height: 50px;
+				color:#fff;
+				font-family: system-ui;
+				padding-left:15px;
+				padding-right:15px;
+				font-size:12px;
+				cursor: pointer;
+			}
+			.topbar-nav li:hover{
+				text-decoration: underline;
+			}
+			body{
+				overflow: hidden;
+			}
+			body *:not(input,textarea){
+				-webkit-highlight:none;
+			}
+			.notice{
+				margin:20px;
+				height:50px;
+				background:beige;
+				border-left:5px solid yellow;
+				line-height: 50px;
+				font-family: system-ui;
+				font-size:12px;
+			}
+			.notice.error{
+				background:pink;
+				border-left-color:#A11818;
+				text-indent:20px;
+			}
+			.files{
+				list-style-type:none;
+				position:absolute;top:40px;left:0px;right:0px;bottom:40px;
+				border-top:1px solid #000;
+				border-bottom:1px solid #000;
+				padding:20px;
+				overflow-x:hidden;
+				overflow-y:auto;
+			}
+			[component=file]{
+				display: inline-block;
+				width:100px;
+				height:100px;
+				position: relative;
+				cursor:pointer;
+				background:#333;
+				margin:5px;
+			}
+			[component=file] img{
+				position:absolute;top:10px;left:25px;width:50px;height:50px;
+			}
+			[component=file] span{
+				position:absolute;bottom:10px;left:0px;right:0px;height:30px;
+				line-height:30px;
+				font-family: system-ui;
+				font-size:12px;
+				color:#fff;
+				text-align:center;
+			}
+			.directory-view{
+				position: absolute;
+				bottom: 0px;left:0px;right:0px;height:40px;
+				overflow:hidden;
+			}
+			.directory-view .path-item{
+				display: inline-block;
+			    transform: rotate(45deg);
+			    color: #fff;
+			    height: 100px;
+			    width: calc(100% / 6);
+			    border-top: 1px solid #000;
+			    border-right: 1px solid #000;
+			    top: -30px;
+			    position:absolute;
+			    background:rgb(34, 34, 34);
+			    cursor:pointer;
+			}
+			.directory-view .path-item:hover{
+				background:#444;
+			}
+			.directory-view span{
+				display: block;
+			    transform: rotate(-45deg);
+			    color: #fff;
+			    position: relative;
+			    left: 30px;
+			    font-family: system-ui;
+			    font-size: 12px;
+			    top: 31px;
+			    width: 50px;
+			    text-align: center;
+			}
+		</style>
+	</head>
+	<body bgcolor="#000">
+
+	</body>
+</html>
