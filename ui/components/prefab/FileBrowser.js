@@ -3,6 +3,7 @@ const GridAdapter = require('./../grid/GridAdapter');
 const fs = require('fs');
 const FileTile = require('./FileBrowser/FileTile');
 const DirectoryView = require('./FileBrowser/DirectoryView');
+const DirectoryControl = require('./FileBrowser/DirectoryControl');
 
 class FileBrowser extends ELCore.Component {
 
@@ -31,6 +32,10 @@ class FileBrowser extends ELCore.Component {
 				this.reload();
 			}
 		});
+		this.control = new DirectoryControl({
+			directory: this.props.currentDir
+		});
+		this.control.parent = this;
 		// console.log("Props" , props);
 		// console.log("File Grid" , this.fileGrid);
 	}
@@ -63,6 +68,7 @@ class FileBrowser extends ELCore.Component {
 	enterDirectory(dirName){
 		this.props.currentDir += '/' + dirName;
 		this.directory.props.directory = this.props.currentDir;
+		this.control.props.directory = this.props.currentDir;
 		// console.log(this.directory);
 		this.reload();
 	}
@@ -81,6 +87,7 @@ class FileBrowser extends ELCore.Component {
 		this.reload();
 		this.domElement.querySelector('.files').appendChild(this.fileGrid.render());
 		this.domElement.querySelector('.directory-view').appendChild(this.directory.render());
+		this.domElement.querySelector('.control-bar').appendChild(this.control.render());
 		return this.domElement;
 	}
 }
