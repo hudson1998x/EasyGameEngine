@@ -6,6 +6,7 @@ const GameLevels = require('./../editor/GameLevels');
 const ScriptsInterface = require('./../editor/ScriptsInterface');
 const ImagesInterface = require('./../editor/ImagesInterface');
 const VideosInterface = require('./../editor/VideosInterface');
+const ObjectEditor = require('./../editor/ObjectEditor');
 
 class Editor extends Elcore.Component {
 	constructor(props){
@@ -37,6 +38,9 @@ class Editor extends Elcore.Component {
 		this.videos = new VideosInterface();
 		this.videos.parent = this;
 
+		this.objectFactory = new ObjectEditor();
+		this.objectFactory.parent = this;
+
 		this.setState({
 			screen: 'InitialScreen'
 		});
@@ -67,6 +71,9 @@ class Editor extends Elcore.Component {
 			break;
 			case 'Videos':
 				this.domElement.appendChild(this.videos.render());
+			break;
+			case 'ObjectFactory':
+				this.domElement.appendChild(this.objectFactory.render());
 			break;
 			case 'Audio':
 			default:
