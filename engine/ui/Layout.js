@@ -18,7 +18,7 @@ class Layout {
 		// console.log(doc.children[0]);
 
 		this.buildTree(doc.children[0].children , this);
-
+		this.id = 'UI.Root';
 	}
 	addChild(child){
 		this.children.push(child);
@@ -49,8 +49,6 @@ class Layout {
 
 			try{
 				let inst = eval(`new ${compName}(${JSON.stringify(props)})`);
-				console.log('Class: ' , compName);
-				console.log('Props' , props);
 				inst.setId(child.getAttribute("id"));
 				parent.addChild(inst);
 

@@ -18,6 +18,10 @@
 				list-style-type: none;
 				padding:0px;
 				margin:0px;
+				z-index:9999;
+			}
+			[hide]{
+				display: none !important;
 			}
 			.topbar-nav li{
 				display: inline-block;
@@ -176,7 +180,7 @@
 			}
 			.rightbar .tab-control{
 				position: absolute;
-				top:0px;left:0px;
+				top:30vh;left:0px;
 				width:40px;bottom:0px;
 				border-right:1px solid #000;
 			}
@@ -192,7 +196,7 @@
 				background:#361ad1;
 			}
 			.rightbar .tab-items{
-				position:absolute;top:0px;left:41px;right:0px;bottom:0px;overflow-y:auto;
+				position:absolute;top:30vh;left:41px;right:0px;bottom:0px;overflow-y:auto;
 				overflow-x:hidden;
 			}
 			.rightbar .tab-items > div{
@@ -201,9 +205,101 @@
 			.rightbar .tab-items > div.active{
 				display:block;
 			}
+			.rightbar .hierarchy{
+				position: absolute;
+				top:0px;
+				left:0px;right:0px;
+				height:calc(30vh - 41px);
+				overflow:auto;
+				background:#222;
+				border-bottom:1px solid #000;
+				list-style: none;
+				padding-top:40px;
+			}
+			.hierarchy li{
+				min-width:95%;
+				width:max-content;
+				height:40px;
+				margin:2.5%;
+				color:#fff;
+				line-height: 40px;
+				font-family: system-ui;
+				font-size:12px;
+				cursor:pointer;
+				border-radius:4px;
+				text-indent:10px;
+			}
+			.hierarchy label{
+				cursor: pointer;
+			}
+			.hierarchy ul{
+				list-style: none;
+				width:100%;
+			}
+			.hierarchy li.hover{
+				background:#343434;
+			}
+			.hierarchy li label button{
+				float:right;
+				height:20px;
+				margin:10px;
+				min-width:30px;
+				padding-left:5px;
+				padding-right: 5px;
+				background:#333;
+				border-radius:4px;
+				border:0px;
+				cursor:pointer;
+				color:#fff;
+			}
+			.hierarchy .title{
+				height:40px;
+				line-height: 40px;
+				position: fixed;top:0px;right:0px;width:350px;
+				text-indent:15px;
+				border-bottom:1px solid black;
+				color:#fff;
+				font-size:13px;
+				font-family: system-ui;
+			}
 			button img{
 				height:50%;
 				width:50%;
+			}
+			.ui-editor .content{
+				position: absolute;top:51px;left:0px;width:calc(100% - 350px);bottom:0px;
+				background:#333;
+			}
+			.ui-editor .topbar-nav button{
+				height:50px;
+				padding-left:15px;
+				padding-right:15px;
+				cursor:pointer;
+				background:transparent;
+				color:#fff;
+				border:0px;
+			}
+			.ui-editor .topbar-nav button:hover{
+				background:#361ad1;
+			}
+			.hierarchy li.active{
+				background:#361ad1;
+			}
+			[component="component-store"] li{
+				width:95%;
+				margin:2.5%;
+				height:40px;
+				border-radius:4px;
+				line-height: 40px;
+				text-indent:15px;
+				cursor: pointer;
+				color:#fff;
+				font-size:12px;
+				font-family: system-ui;
+				list-style: none;
+			}
+			[component="component-store"] li:hover{
+				background: #361ad1;
 			}
 		</style>
 		<script>
