@@ -5,6 +5,63 @@ class Abstract {
 		this.parent = null;
 		this.children = [];
 		this.id = "";
+		this.events = {
+			keydown: [] , 
+			keyup: [] , 
+			hover: [] , 
+			hoverleave: [] , 
+			context: [] , 
+			click: []
+		};
+		this.scripts = [];
+		this.domElement.addEventListener('click' , (ev) => {
+			this.events.click.forEach((call) => {
+				call(ev);
+			});
+		});
+		this.domElement.addEventListener('keydown' , (ev) => {
+			this.events.keydown.forEach((call) => {
+				call(ev);
+			});
+		});
+		this.domElement.addEventListener('keyup' , (ev) => {
+			this.events.keyup.forEach((call) => {
+				call(ev);
+			});
+		});
+		this.domElement.addEventListener('context' , (ev) => {
+			this.events.context.forEach((call) => {
+				call(ev);
+			});
+		});
+		this.domElement.addEventListener('mouseenter' , (ev) => {
+			this.events.hover.forEach((call) => {
+				call(ev);
+			});
+		});
+		this.domElement.addEventListener('mouseleave' , (ev) => {
+			this.events.hoverleave.forEach((call) => {
+				call(ev);
+			});
+		});
+	}
+	click(callable){
+		this.events.click.push(callable);
+	}
+	keydown(callable){
+		this.events.keydown.push(callable);
+	}
+	keyup(callable){
+		this.events.keyup.push(callable);
+	}
+	hover(callable){
+		this.events.hover.push(callable);
+	}
+	hoverleave(callable){
+		this.events.hoverleave.push(callable);
+	}
+	context(callable){
+		this.events.context.push(callable);
 	}
 	setId(id){
 		this.id = id;
@@ -43,6 +100,13 @@ class Abstract {
 		return 'div';
 	}
 	render(){
+		this.domElement.id = this.id;
+		if ( this.props.style ) {
+			this.domElement.setAttribute("style" , this.props.style);
+		}
+		this.children.forEach((child) => {
+			this.domElement.appendChild(child.render());
+		})
 		return this.domElement;
 	}
 }

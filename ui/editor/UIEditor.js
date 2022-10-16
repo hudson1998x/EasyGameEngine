@@ -1,10 +1,9 @@
 const ELCore = require('./../components/SupportLibrary');
 const Hierarchy = require('./../components/object/Hierarchy');
 
-
 class UIEditor extends ELCore.Component {
 
-	constructor(props){
+	constructor(props = {}){
 		super(props);
 
 		this.hierarchy = new Hierarchy({});
@@ -28,7 +27,11 @@ class UIEditor extends ELCore.Component {
 
 			</div>
 		`;
-
+		if ( this.state.object ) {
+			this.domElement.querySelector('.content').appendChild(
+				this.state.object.render()
+			);
+		}
 		this.addTabComponent(this.hierarchy);
 
 		let activeComponent = this.state.active;

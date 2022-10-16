@@ -1,7 +1,15 @@
+const ImageComponent = require('./components/ImageComponent');
+const VideoComponent = require('./components/VideoComponent');
+const AudioComponent = require('./components/AudioComponent');
+const RectangleComponent = require('./components/RectangleComponent');
+const ScriptableComponent = require('./components/ScriptableComponent');
 
 
 class Layout {
 
+	constructor(){
+		this.children = [];
+	}
 	parse(fileContent){
 
 		let parser = new DOMParser();
@@ -11,6 +19,18 @@ class Layout {
 
 		this.buildTree(doc.children[0].children , this);
 
+	}
+	addChild(child){
+		this.children.push(child);
+	}
+	render(){
+		let d = document.createElement("div");
+
+		this.children.forEach((child) => {
+			d.appendChild(child.render());
+		});
+
+		return d;
 	}
 	buildTree(componentList , parent){
 
@@ -23,12 +43,14 @@ class Layout {
 			};
 			if ( child.attributes ) {
 				for(let i = 0;i < child.attributes.length;i++){
-					props[child.attributes[i]] = child.getAttribute(child.attributes[i]);
+					props[child.attributes[i].nodeName] = child.attributes[i].nodeValue;
 				}	
 			}
 
 			try{
-				let inst = new compName(props);
+				let inst = eval(`new ${compName}(${JSON.stringify(props)})`);
+				console.log('Class: ' , compName);
+				console.log('Props' , props);
 				inst.setId(child.getAttribute("id"));
 				parent.addChild(inst);
 

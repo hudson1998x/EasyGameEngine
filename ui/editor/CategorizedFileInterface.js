@@ -14,6 +14,7 @@ class CategorizedFileInterface extends ELCore.Component {
 			this.autoloadDefaults();
 		}catch(e){
 			console.log('No Autoload: ' , this.autoloadDefaults);
+			console.log(e);
 			this.fileDir = props.dir;
 			this.fileType = props.fileType;
 			this.onFileOpenAction = props.onFileOpen;
