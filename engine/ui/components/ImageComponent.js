@@ -4,7 +4,6 @@ class ImageComponent extends Abstract {
 
 	constructor(props = {}){
 		super(props);
-		console.log(this);
 	}
 	defaultNodeName(){
 		return 'img';

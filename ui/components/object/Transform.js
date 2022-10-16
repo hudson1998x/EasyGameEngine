@@ -66,7 +66,7 @@ class Transform extends ELCore.Component {
 	}
 	getCssValue(domElement , prop){
 		let out = null;
-		if ( (domElement.getAttribute("style") ?? "").indexOf(prop) > -1 ) {
+		if ( domElement && (domElement.getAttribute("style") ?? "").indexOf(prop) > -1 ) {
 			(domElement.getAttribute("style") ?? "").split(";").forEach((propval) => {
 				let kv = propval.split(":");
 				if ( kv[0] === prop ) {

@@ -54,7 +54,7 @@ class Component {
 			//do nothing.
 			outparent = parent;
 		}
-		console.log('Parent: ' , outparent);
+		// console.log('Parent: ' , outparent);
 		return outparent;
 	}
 	getDefaultTagName(){

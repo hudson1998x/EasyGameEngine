@@ -29,7 +29,6 @@ class FileTile extends ELCore.Component {
 			}
 		}
 		this.domElement.ondblclick = () => {
-			console.log(this.props);
 			this.props.openFile(this.file);
 		}
 		return this.domElement;

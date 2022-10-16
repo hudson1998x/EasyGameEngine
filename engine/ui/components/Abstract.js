@@ -1,6 +1,12 @@
+const AssetManager = require('./../../AssetManager');
+
 class Abstract {
 	constructor(props = {}){
+		// console.log(props);
 		this.props = props;
+		
+		this.props.scripts = (props.scripts + "") ? (props.scripts + "").split(",") : [];
+
 		this.domElement = document.createElement(this.defaultNodeName());		
 		this.parent = null;
 		this.children = [];
@@ -13,6 +19,14 @@ class Abstract {
 			context: [] , 
 			click: []
 		};
+		if ( !this.props.style ){
+			this.props.style = '';
+		}
+		this.props.style += 'position:absolute;';
+
+		if ( !this.props.scripts ) {
+			this.props.scripts = [];
+		}	 
 		this.domElement.addEventListener('click' , (ev) => {
 			this.events.click.forEach((call) => {
 				call(ev);
@@ -42,6 +56,24 @@ class Abstract {
 			this.events.hoverleave.forEach((call) => {
 				call(ev);
 			});
+		});
+		this.initScripts();
+	}
+	initScripts(){
+		this.props.scripts.forEach((script) => {
+			if ( script === "undefined" ) {
+				return;
+			}
+			AssetManager.loadAsset(script)
+						.then((rawJs) => {
+							let dec = eval(rawJs);
+
+							let handle = eval(`new ${dec}(this)`);
+							handle.onScriptLoaded(this);
+						})
+						.catch((err) => {
+							console.error(err);
+						});
 		});
 	}
 	click(callable){

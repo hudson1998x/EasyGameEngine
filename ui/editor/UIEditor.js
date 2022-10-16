@@ -3,6 +3,7 @@ const Hierarchy = require('./../components/object/Hierarchy');
 const AddComponentList = require('./../components/object/AddComponentList');
 const CssTransformer = require('./../components/object/CssTransformer');
 const Transform = require('./../components/object/Transform');
+const PropertyEditor = require('./../components/object/PropertyEditor');
 const fs = require('fs');
 class UIEditor extends ELCore.Component {
 
@@ -22,6 +23,9 @@ class UIEditor extends ELCore.Component {
 
 		this.transform = new Transform({});
 		this.transform.parent = this;
+
+		this.propEditor = new PropertyEditor();
+		this.propEditor.parent = this;
 	}
 	render(){
 		this.hierarchy.changeObject(this.state.object);
@@ -51,6 +55,7 @@ class UIEditor extends ELCore.Component {
 		}
 		this.addTabComponent(this.componentStore);
 		this.addTabComponent(this.transform);
+		this.addTabComponent(this.propEditor);
 		this.addTabComponent(this.cssEditor);
 		const saveBtn = document.createElement('button');
 

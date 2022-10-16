@@ -19,28 +19,32 @@ class CssTransformer extends ELCore.Component {
 
 			list.className = 'prop-list';
 
-			let css = getComputedStyle(this.parent.state.activeObject.domElement);
+			try{
+				let css = getComputedStyle(this.parent.state.activeObject.domElement);
 
-			for(let prop in css) {
-				if ( isNaN(prop) ) {
+				for(let prop in css) {
+					if ( isNaN(prop) ) {
 
-					let d = document.createElement("div");
+						let d = document.createElement("div");
 
-					d.innerHTML = `
-						<label>${prop}</label>
-						<input type="text" value="${css[prop]}"/>
-					`
+						d.innerHTML = `
+							<label>${prop}</label>
+							<input type="text" value="${css[prop]}"/>
+						`
 
-					d.querySelector('input').oninput = () => {
-						let val = d.querySelector('input').value;
-						this.parent.state.activeObject.domElement.style[prop] = value;
+						d.querySelector('input').oninput = () => {
+							let val = d.querySelector('input').value;
+							this.parent.state.activeObject.domElement.style[prop] = value;
 
-						this.parent.state.activeObject.props.style = this.parent.state.activeObject.domElement.getAttribute('style');
+							this.parent.state.activeObject.props.style = this.parent.state.activeObject.domElement.getAttribute('style');
+
+						}
+						list.appendChild(d);
 
 					}
-					list.appendChild(d);
-
 				}
+			}catch(f){
+				
 			}
 
 			this.domElement.appendChild(list);
