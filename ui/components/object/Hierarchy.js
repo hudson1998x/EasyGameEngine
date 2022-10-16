@@ -4,6 +4,10 @@ class Hierarchy extends ELCore.Component {
 
 	constructor(props){
 		super(props);
+		this.domElement.addEventListener('scroll' , (ev) => {
+			this.props.scrollY = ev.scrollTop;
+			this.props.scrollX = ev.scrollLeft;
+		});
 	}
 	getIcon(){
 		return 'media/hierarchy.png';
@@ -27,7 +31,13 @@ class Hierarchy extends ELCore.Component {
 			this.domElement.appendChild(this.createTree(this.state.object));
 
 		}
+		setTimeout( () => {
+			if ( this.domElement.querySelector('.active') ) {
 
+			} else {
+				this.domElement.querySelector(".active").scrollIntoView();
+			}
+		} , 15);
 		return this.domElement;
 	}
 	setActiveObject(obj){

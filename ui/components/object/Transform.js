@@ -69,7 +69,8 @@ class Transform extends ELCore.Component {
 		if ( domElement && (domElement.getAttribute("style") ?? "").indexOf(prop) > -1 ) {
 			(domElement.getAttribute("style") ?? "").split(";").forEach((propval) => {
 				let kv = propval.split(":");
-				if ( kv[0] === prop ) {
+				// console.log(kv);
+				if ( kv[0].trim() === prop ) {
 					out = kv[1];
 				}
 			});
@@ -79,6 +80,8 @@ class Transform extends ELCore.Component {
 			}
 		}
 
+		// console.log(domElement.getAttribute("style") , prop);
+
 		return "";
 	}
 	swap(cssstr , key , value){
@@ -86,12 +89,16 @@ class Transform extends ELCore.Component {
 		let out = '';
 
 		cssstr.split(";").forEach((propval) => {
-			if ( propval.split(":")[0] == key ) {
+			if ( propval.split(":")[0].trim() == key ) {
 				out += key + ":" + value + ";"
 			} else {
 				out += propval + ";";
 			}
-		})
+		});
+
+		if ( out == "" ) {
+			console.log("CSS string: " + cssstr + ", cannot be modified" , key , value);
+		}
 
 		return out;
 

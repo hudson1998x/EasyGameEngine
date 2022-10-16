@@ -6,6 +6,8 @@ const VideoComponent = require('./../../../engine/ui/components/VideoComponent')
 const AudioComponent = require('./../../../engine/ui/components/AudioComponent');
 const RectangleComponent = require('./../../../engine/ui/components/RectangleComponent');
 const ScriptableComponent = require('./../../../engine/ui/components/ScriptableComponent');
+const TextComponent = require('./../../../engine/ui/components/TextComponent');
+const RGBBorder = require('./../../../engine/ui/components/RGBBorder');
 
 
 class AddComponentList extends ELCore.Component {

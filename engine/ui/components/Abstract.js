@@ -7,6 +7,10 @@ class Abstract {
 		
 		this.props.scripts = (props.scripts + "") ? (props.scripts + "").split(",") : [];
 
+		if ( !this.props.hovercss ) {
+			this.props.hovercss = "";
+		}
+
 		this.domElement = document.createElement(this.defaultNodeName());		
 		this.parent = null;
 		this.children = [];
@@ -47,7 +51,7 @@ class Abstract {
 				call(ev);
 			});
 		});
-		this.domElement.addEventListener('mouseenter' , (ev) => {
+		this.domElement.addEventListener('mouseover' , (ev) => {
 			this.events.hover.forEach((call) => {
 				call(ev);
 			});
@@ -58,6 +62,14 @@ class Abstract {
 			});
 		});
 		this.initScripts();
+		let css = this.props.style;
+		this.hover(() => {
+			this.domElement.setAttribute("style" , css + ";" + this.props.hovercss);
+		});
+		this.hoverleave(() => {
+			this.domElement.setAttribute("style" , css);
+		});
+		console.log(this);
 	}
 	initScripts(){
 		this.props.scripts.forEach((script) => {

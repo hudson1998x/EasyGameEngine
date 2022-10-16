@@ -122,7 +122,7 @@ class UIEditor extends ELCore.Component {
 				for(let i = 0;i < tabIndent;i++){
 					xml += '  ';
 				}
-				xml += '</' + component.constructor.name + '>';
+				xml += '</' + component.constructor.name + '>\n';
 			} else {
 				xml += '/>\n';
 			}

@@ -34,7 +34,7 @@ class CssTransformer extends ELCore.Component {
 
 						d.querySelector('input').oninput = () => {
 							let val = d.querySelector('input').value;
-							this.parent.state.activeObject.domElement.style[prop] = value;
+							this.parent.state.activeObject.domElement.style[prop] = val;
 
 							this.parent.state.activeObject.props.style = this.parent.state.activeObject.domElement.getAttribute('style');
 

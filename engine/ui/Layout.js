@@ -3,6 +3,8 @@ const VideoComponent = require('./components/VideoComponent');
 const AudioComponent = require('./components/AudioComponent');
 const RectangleComponent = require('./components/RectangleComponent');
 const ScriptableComponent = require('./components/ScriptableComponent');
+const TextComponent = require('./components/TextComponent');
+const RGBBorder = require('./components/RGBBorder');
 
 
 class Layout {
