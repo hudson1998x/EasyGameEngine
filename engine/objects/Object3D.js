@@ -36,9 +36,15 @@ class Object3D {
 			});
 		});
 	}
+	isReady(){
+		return this.totalToLoad === this.loaded;
+	}
 	loadMaterialsAndScripts(obj){
+		this.totalToLoad = 0;
+		this.loaded = 0;
 		return new Promise((resolve , reject) => {
 			for(let prop in obj.material) {
+				this.totalToLoad++;
 				AssetManager.loadAsset(
 					obj.material[prop].src
 				)
@@ -47,6 +53,7 @@ class Object3D {
 					 let texture = new THREE.Texture(img);
 					 img.onload = () => {
 					 	texture.needsUpdate = true;
+					 	this.loaded++;
 					 };
 					 img.src = 'data:' + obj.material[prop].mime + ';base64,' + base64;
 					 this.mesh.material[prop] = img;
@@ -55,6 +62,7 @@ class Object3D {
 			}
 			if ( obj.scripts && Array.isArray(obj.scripts) ) {
 				obj.scripts.forEach((script) => {
+					this.totalToLoad++;
 					AssetManager.loadAsset(
 						script
 					)
@@ -67,7 +75,7 @@ class Object3D {
 						let inst = new obj(this);
 
 						this.scripts.push(inst);
-
+						this.loaded++;
 						
 					}).catch(reject);
 				});
