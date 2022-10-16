@@ -11,6 +11,28 @@ class AssetManager {
 		}
 
 	}
+	static getPathWherever(str){
+		if ( module && module.exports ) {
+			if ( AssetManager.expectingImage(str) ) {
+				return str.split('assets://').join('../source/');
+			} else {
+				return AssetManager.getAssetPath(str);
+			}
+		}
+	}
+	static expectingImage(str){
+		switch(true){
+			case str.indexOf('.png') > -1:
+			case str.indexOf('.gif') > -1:
+			case str.indexOf('.jpeg') > -1:
+			case str.indexOf('.jpg') > -1:
+			case str.indexOf('.ico') > -1:
+			case str.indexOf('.bmp') > -1:
+				return true;
+			default:
+				return false;
+		}
+	}
 	static loadAsset(path) {
 		path = AssetManager.getAssetPath(path);
 		return new Promise((resolve , reject) => {

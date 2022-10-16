@@ -1,9 +1,13 @@
 const Abstract = require('./Abstract');
+const AssetManager = require('./../../AssetManager');
 
 class ImageComponent extends Abstract {
 
 	constructor(props = {}){
 		super(props);
+		if ( !this.props.src ) {
+			this.props.src = "";
+		}
 	}
 	defaultNodeName(){
 		return 'img';
@@ -11,7 +15,7 @@ class ImageComponent extends Abstract {
 	render(){
 		super.render();
 
-		this.domElement.src = this.props.src;
+		this.domElement.src = AssetManager.getPathWherever(this.props.src);
 
 		return this.domElement;
 	}
