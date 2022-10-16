@@ -75,6 +75,13 @@ class Editor extends Elcore.Component {
 			case 'ObjectFactory':
 				this.domElement.appendChild(this.objectFactory.render());
 			break;
+			case 'ObjectEditor':
+				let editor = this.state.EditorComponent;
+
+				editor.parent = this;
+
+				this.domElement.appendChild(editor.render());
+			break;
 			case 'Audio':
 			default:
 				this.initialScreen.setState({

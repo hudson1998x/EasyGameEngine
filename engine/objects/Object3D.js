@@ -74,6 +74,8 @@ class Object3D {
 
 						let inst = new obj(this);
 
+						window.exports = {};
+
 						this.scripts.push(inst);
 						this.loaded++;
 						

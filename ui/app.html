@@ -170,6 +170,41 @@
 				border:0px;
 				text-indent:15px;
 			}
+			.rightbar{
+				position:absolute;top:0px;right:0px;width:350px;bottom:0px;
+				background:#111;
+			}
+			.rightbar .tab-control{
+				position: absolute;
+				top:0px;left:0px;
+				width:40px;bottom:0px;
+				border-right:1px solid #000;
+			}
+			.rightbar .tab-control button{
+				width:40px;
+				height:40px;
+				background:transparent;
+				border:0px;
+				cursor:pointer;
+				border-bottom:1px solid #000;
+			}
+			.rightbar .tab-control button.active{
+				background:#361ad1;
+			}
+			.rightbar .tab-items{
+				position:absolute;top:0px;left:41px;right:0px;bottom:0px;overflow-y:auto;
+				overflow-x:hidden;
+			}
+			.rightbar .tab-items > div{
+				display: none;
+			}
+			.rightbar .tab-items > div.active{
+				display:block;
+			}
+			button img{
+				height:50%;
+				width:50%;
+			}
 		</style>
 		<script>
 			function prompt(message){

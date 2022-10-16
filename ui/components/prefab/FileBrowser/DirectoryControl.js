@@ -12,6 +12,12 @@ class DirectoryControl extends ELCore.Component {
 			this.mkdir();
 		};
 
+		this.newFileBtn = document.createElement("button");
+		this.newFileBtn.textContent = ' + Create ' + this.props.label;
+		this.newFileBtn.onclick = () => {
+			this.parent.requestFileCreate();
+		}
+
 	}
 	mkdir(){
 		prompt("Enter Directory Name").then((dirname) => {
@@ -36,6 +42,8 @@ class DirectoryControl extends ELCore.Component {
 
 		this.domElement.innerHTML = '';
 		this.domElement.appendChild(this.mkdirButton);
+		this.domElement.appendChild(this.newFileBtn);
+		this.newFileBtn.textContent =  ' + Create ' + this.props.label;
 		return this.domElement;
 	}
 

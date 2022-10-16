@@ -33,11 +33,17 @@ class FileBrowser extends ELCore.Component {
 			}
 		});
 		this.control = new DirectoryControl({
-			directory: this.props.currentDir
+			directory: this.props.currentDir , 
+			label: this.fileLabel
 		});
 		this.control.parent = this;
 		// console.log("Props" , props);
 		// console.log("File Grid" , this.fileGrid);
+	}
+	setFileLabel(label){
+		this.fileLabel = label;
+		this.control.props.label = this.fileLabel;
+		this.reload();
 	}
 	reload() {
 		fs.readdir(this.props.currentDir , (err , files) => {
@@ -61,7 +67,7 @@ class FileBrowser extends ELCore.Component {
 			
 			this.fileGrid.list = list;
 			this.fileGrid.render();
-
+			this.control.render();
 			this.directory.render();
 		});
 	}
@@ -71,6 +77,13 @@ class FileBrowser extends ELCore.Component {
 		this.control.props.directory = this.props.currentDir;
 		// console.log(this.directory);
 		this.reload();
+	}
+	requestFileCreate(){
+		this.parent
+			.createNewFilePrompt()
+			.then(() => {
+				this.reload();
+			});
 	}
 	render() {
 		this.domElement.innerHTML = `
