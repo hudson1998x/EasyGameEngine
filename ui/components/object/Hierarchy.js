@@ -34,7 +34,6 @@ class Hierarchy extends ELCore.Component {
 		this.parent.setState({
 			activeObject: obj
 		});
-		console.log(this.parent);
 	}
 	createTree(obj){
 
@@ -58,34 +57,40 @@ class Hierarchy extends ELCore.Component {
 		let rename = document.createElement("button");
 		rename.textContent = 'Rename';
 		rename.onclick = (ev) => {
-			ev.stopImmediatePropagation();
-			prompt("Enter Object ID")
-				.then((id) => {
-					li.object.setId(id);
-					this.render();
-				})
-				.catch(() => {
-					//empty leave alone.
-				});
+			if ( ev.target.tagName.toLowerCase() === 'button' ) {
+				ev.stopImmediatePropagation();
+				prompt("Enter Object ID")
+					.then((id) => {
+						li.object.setId(id);
+						this.render();
+					})
+					.catch(() => {
+						//empty leave alone.
+					});
+			}
+			
 		}
 
 		let toggleVis = document.createElement("button");
 		toggleVis.textContent = obj && obj.domElement && obj.domElement.hasAttribute("hide") ? "Show" : "Hide";
 
 		toggleVis.onclick = (ev) => {
-			ev.stopImmediatePropagation();
-			if ( toggleVis.textContent === 'Hide' ) {
-				li.object.domElement.setAttribute("hide" , "");
-				toggleVis.textContent = 'Show';
-			} else {
-				li.object.domElement.removeAttribute("hide");
-				toggleVis.textContent = 'Hide';
+			if ( ev.target.tagName.toLowerCase() === 'button' ) {
+				ev.stopImmediatePropagation();
+				if ( toggleVis.textContent === 'Hide' ) {
+					li.object.domElement.setAttribute("hide" , "");
+					toggleVis.textContent = 'Show';
+				} else {
+					li.object.domElement.removeAttribute("hide");
+					toggleVis.textContent = 'Hide';
+				}
 			}
 		};
 		li.object = obj;
 		li.onclick = (ev) => {
 			ev.stopImmediatePropagation();
 			ev.stopPropagation();
+			ev.preventDefault();
 			this.setActiveObject(li.object);
 		}
 		if ( li.object === this.parent.state.activeObject ) {

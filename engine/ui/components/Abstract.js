@@ -13,7 +13,6 @@ class Abstract {
 			context: [] , 
 			click: []
 		};
-		this.scripts = [];
 		this.domElement.addEventListener('click' , (ev) => {
 			this.events.click.forEach((call) => {
 				call(ev);
